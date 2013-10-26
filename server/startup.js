@@ -2,7 +2,7 @@ Meteor.startup(function () {
   if (Categories.find().count() === 0) {
     var categories = ["Campus Events",
                       "Dining Services",
-                      "Housing/Residential Life",
+                      "Housing and Residential Life",
                       "Health Services",
                       "Facilities",
                       "Academics",

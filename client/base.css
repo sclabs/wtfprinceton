@@ -43,3 +43,7 @@ a:hover {
 .well-chat > table > tbody > tr > td > p {
   margin: 0px;
 }
+
+.navbar-inverse .brand {
+  color: white;
+}

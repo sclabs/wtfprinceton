@@ -1,9 +1,6 @@
 <head>
   <title>wtfprinceton</title>
 </head>
-<body>
-  {{> body}}
-</body>
 
 <template name="body">
 {{> navbar}}
@@ -25,7 +22,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand action-home">wtfprinceton</a>
+      <a href="{{pathFor 'all'}}" class="brand">wtfprinceton</a>
       <div class="nav-collapse">
         <ul class="nav">
           <li><a class="switch-submit {{active_submit}}">Submit Issue</a></li>
@@ -33,7 +30,7 @@
             <ul class="dropdown-menu">
               {{> category_list}}
               <li class="divider"></li>
-              <li><a class="action-all {{active_all}}">All Issues</a></li>
+              <li><a href="{{pathFor 'all'}}" class="{{active_all}}">All Issues</a></li>
             </ul>
           </li>
         </ul>
@@ -84,6 +81,7 @@
       <h1>wtfprinceton</h1>
       <p>A place to vent feelings, identify issues, and propose solutions.</p>
     </header>
+    {{yield}}
   </div>
 </template>
 
@@ -93,7 +91,7 @@
     <li class="nav-header">Categories</li>
     {{> category_list}}
     <li class="divider"></li>
-    <li><a class="action-all active-all">All Issues</a></li>
+    <li><a href="{{pathFor 'all'}}" class="active-all">All Issues</a></li>
   </ul>
 </div>
 </template>
@@ -106,6 +104,6 @@
 
 <template name="category">
 <li class="{{active}}">
-  <a class="action-category">{{name}} <span class="label label-warning">{{unread}}</span></a>
+  <a href="{{pathFor 'category'}}" class="{{active-category}}">{{name}} <span class="label label-warning">{{unread}}</span></a>
 </li>
 </template>
