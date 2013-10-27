@@ -54,5 +54,15 @@ Router.map(function() {
       return Issues.findOne(this.params._id);
     }
   });
+
+  this.route('about', {
+    path: '/about',
+
+    action: function() {
+      Session.set('state', 'about');
+      Session.set('category', null);
+      this.render();
+    }
+  });
 });
 

@@ -42,6 +42,10 @@ Template.navbar.active_submit = function() {
   return Session.equals('state', 'submit') ? 'active' : '';
 }
 
+Template.navbar.active_about = function() {
+  return Session.equals('state', 'about') ? 'active' : '';
+}
+
 Template.category_sidebar.active_all = function() {
   return Session.equals('category', 'all') ? 'active' : '';
 }
