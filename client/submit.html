@@ -1,0 +1,21 @@
+<template name="submit">
+<h1>Submit Issue</h1>
+<form>
+  <label>Category</label>
+  <select id="input-category">
+    {{#each categories}}
+    {{> category_option}}
+    {{/each}}
+  </select>
+  <label>Title</label>
+  <input type="text" id="input-title"></input>
+  <label>Issue</label>
+  <textarea rows="3" id="input-text"></textarea>
+  <br>
+  <a class="btn btn-primary action-submit">Submit</a>
+</form>
+</template>
+
+<template name="category_option">
+<option>{{name}}</option>
+</template>
