@@ -2,22 +2,32 @@ Router.configure({
   layoutTemplate: 'body'
 });
 
-Router.map(function () {
+Router.map(function() {
   this.route('all', {
     path: '/',
 
-    action: function () {
-      Session.set('state', null);
+    action: function() {
+      Session.set('state', 'browse');
+      Session.set('category', 'all');
       this.render();
+    },
+
+    data: function() {
+      return Issues.find();
     }
   });
 
   this.route('category', {
     path: '/category/:name',
 
-    action: function () {
-      Session.set('state', this.params.name);
+    action: function() {
+      Session.set('state', 'browse');
+      Session.set('category', this.params.name);
       this.render();
+    },
+
+    data: function() {
+      return Issues.find({category: this.params.name});
     }
   });
 
@@ -26,6 +36,7 @@ Router.map(function () {
 
     action: function () {
       Session.set('state', 'submit');
+      Session.set('category', null);
       this.render();
     }
   });
@@ -33,9 +44,14 @@ Router.map(function () {
   this.route('issue', {
     path: '/issue/:_id',
 
-    action: function () {
-      Session.set('state', this.params._id);
+    action: function() {
+      Session.set('state', 'browse');
+      Session.set('category', this.getData().category);
       this.render();
+    },
+
+    data: function() {
+      return Issues.findOne(this.params._id);
     }
   });
 });

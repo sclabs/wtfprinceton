@@ -27,13 +27,21 @@ Template.category_list.categories = function() {
 };
 
 Template.category.active = function() {
-  return Session.equals('state', this.name) ? 'active' : '';
+  return Session.equals('category', this.name) ? 'active' : '';
 }
 
 Template.navbar.active_all = function() {
-  return Session.equals('state', null) ? 'active' : '';
+  return Session.equals('category', 'all') ? 'active' : '';
+}
+
+Template.navbar.active_browse = function() {
+  return Session.equals('state', 'browse') ? 'active' : '';
+}
+
+Template.navbar.active_submit = function() {
+  return Session.equals('state', 'submit') ? 'active' : '';
 }
 
 Template.category_sidebar.active_all = function() {
-  return Session.equals('state', null) ? 'active' : '';
+  return Session.equals('category', 'all') ? 'active' : '';
 }

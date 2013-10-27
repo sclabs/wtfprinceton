@@ -25,8 +25,8 @@
       <a href="{{pathFor 'all'}}" class="brand">wtfprinceton</a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li><a class="switch-submit {{active_submit}}">Submit Issue</a></li>
-          <li class="dropdown"><a class="dropdown-toggle {{active_browse}}" data-toggle="dropdown">Browse Issues <b class="caret"></b></a>
+          <li class="{{active_submit}}"><a href="{{pathFor 'submit'}}">Submit Issue</a></li>
+          <li class="dropdown {{active_browse}}"><a class="dropdown-toggle" data-toggle="dropdown">Browse Issues <b class="caret"></b></a>
             <ul class="dropdown-menu">
               {{> category_list}}
               <li class="divider"></li>
