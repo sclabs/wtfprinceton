@@ -6,6 +6,8 @@ Router.map(function() {
   this.route('all', {
     path: '/',
 
+    template: 'browse',
+
     action: function() {
       Session.set('state', 'browse');
       Session.set('category', 'all');
@@ -13,12 +15,18 @@ Router.map(function() {
     },
 
     data: function() {
-      return Issues.find();
+      issues = Issues.find({});
+      return {
+        issues: issues,
+        count: issues.count()
+      };
     }
   });
 
   this.route('category', {
     path: '/category/:name',
+
+    template: 'browse',
 
     action: function() {
       Session.set('state', 'browse');
@@ -27,7 +35,11 @@ Router.map(function() {
     },
 
     data: function() {
-      return Issues.find({category: this.params.name});
+      issues = Issues.find({category: this.params.name});
+      return {
+        issues: issues,
+        count: issues.count()
+      };
     }
   });
 
@@ -43,6 +55,8 @@ Router.map(function() {
 
   this.route('issue', {
     path: '/issue/:_id',
+
+    template: 'issue_detail',
 
     action: function() {
       Session.set('state', 'browse');
@@ -60,6 +74,16 @@ Router.map(function() {
 
     action: function() {
       Session.set('state', 'about');
+      Session.set('category', null);
+      this.render();
+    }
+  });
+
+  this.route('changelog', {
+    path: '/changlog',
+
+    action: function() {
+      Session.set('state', 'changelog');
       Session.set('category', null);
       this.render();
     }

@@ -1,0 +1,28 @@
+<template name="browse">
+<div class="row">
+  <div class="span3">
+    {{> category_sidebar}}
+  </div>
+  <div class="span9">
+    {{> issue_list}}
+  </div>
+</div>
+</template>
+
+<template name="issue_list">
+  {{#if count}}
+  <p>what</p>
+  {{#each issues}}
+  {{> issue}}
+  {{/each}}
+  {{else}}
+  <p>There are no issues in this category yet!</p>
+  {{/if}}
+</template>
+
+<template name="issue">
+<div class="well">
+  <h3>{{title}}</h3>
+  <p>{{text}}</p>
+</div>
+</template>

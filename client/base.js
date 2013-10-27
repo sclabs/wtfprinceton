@@ -46,6 +46,10 @@ Template.navbar.active_about = function() {
   return Session.equals('state', 'about') ? 'active' : '';
 }
 
+Template.navbar.active_changelog = function() {
+  return Session.equals('state', 'changelog') ? 'active' : '';
+}
+
 Template.category_sidebar.active_all = function() {
   return Session.equals('category', 'all') ? 'active' : '';
 }
