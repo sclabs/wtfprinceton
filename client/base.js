@@ -26,8 +26,14 @@ Template.category_list.categories = function() {
   return Categories.find({});
 };
 
-Template.category.events({
-  "click .action-category": function(e, t) {
-    console.log(this.name);
-  }
-});
+Template.category.active = function() {
+  return Session.equals('state', this.name) ? 'active' : '';
+}
+
+Template.navbar.active_all = function() {
+  return Session.equals('state', null) ? 'active' : '';
+}
+
+Template.category_sidebar.active_all = function() {
+  return Session.equals('state', null) ? 'active' : '';
+}

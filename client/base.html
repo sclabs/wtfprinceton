@@ -30,7 +30,7 @@
             <ul class="dropdown-menu">
               {{> category_list}}
               <li class="divider"></li>
-              <li><a href="{{pathFor 'all'}}" class="{{active_all}}">All Issues</a></li>
+              <li class="{{active_all}}"><a href="{{pathFor 'all'}}">All Issues</a></li>
             </ul>
           </li>
         </ul>
@@ -91,7 +91,7 @@
     <li class="nav-header">Categories</li>
     {{> category_list}}
     <li class="divider"></li>
-    <li><a href="{{pathFor 'all'}}" class="active-all">All Issues</a></li>
+    <li class="{{active_all}}"><a href="{{pathFor 'all'}}">All Issues</a></li>
   </ul>
 </div>
 </template>
@@ -104,6 +104,6 @@
 
 <template name="category">
 <li class="{{active}}">
-  <a href="{{pathFor 'category'}}" class="{{active-category}}">{{name}} <span class="label label-warning">{{unread}}</span></a>
+  <a href="{{pathFor 'category'}}">{{name}} <span class="label label-warning">{{unread}}</span></a>
 </li>
 </template>
