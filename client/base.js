@@ -53,3 +53,7 @@ Template.navbar.active_changelog = function() {
 Template.category_sidebar.active_all = function() {
   return Session.equals('category', 'all') ? 'active' : '';
 }
+
+Template.category_sidebar.rendered = function() {
+  $('#sidebar').affix();
+}

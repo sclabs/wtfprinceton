@@ -9,7 +9,6 @@
     {{yield}}
   </div>
 </div>
-{{> footer}}
 </template>
 
 <template name="navbar">
@@ -74,7 +73,7 @@
 </template>
 
 <template name="category_sidebar">
-<div class="well nav-well">
+<div class="well nav-well" id="sidebar">
   <ul class="nav nav-list">
     <li class="nav-header">Categories</li>
     {{> category_list}}
