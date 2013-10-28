@@ -1,0 +1,23 @@
+<template name="issue">
+<div class="well">
+  <div class="row-fluid">
+    <div class="span1">
+      <div class="btn-group btn-group-vertical">
+        <button class="btn btn-success action-upvote">
+          <i class="icon-chevron-up"></i>
+        </button>
+        <button class="btn">{{score}}</button>
+        <button class="btn btn-danger action-downvote">
+          <i class="icon-chevron-down"></i>
+        </button>
+      </div>
+    </div>
+    <div class="span11">
+      <h3><a href="{{pathFor 'issue'}}">{{title}}</a></h3>
+      <p class="muted">Submitted by {{user_netid}} on {{formatDate timestamp}}</p>
+      <p>{{text}}</p>
+    </div>
+  </div>
+</div>
+</template>
+
