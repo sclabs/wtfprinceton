@@ -11,18 +11,10 @@
 
 <template name="issue_list">
   {{#if count}}
-  <p>what</p>
   {{#each issues}}
   {{> issue}}
   {{/each}}
   {{else}}
   <p>There are no issues in this category yet!</p>
   {{/if}}
-</template>
-
-<template name="issue">
-<div class="well">
-  <h3>{{title}}</h3>
-  <p>{{text}}</p>
-</div>
 </template>
