@@ -5,6 +5,89 @@
   </div>
   <div class="span9">
     {{> issue}}
+    {{> vote_history}}
+    {{> comment_list}}
   </div>
 </div>
+</template>
+
+<template name="vote_history">
+<div class="accordion" id="accordion-votes">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-votes" href="#votes">Vote History</a>
+    </div>
+  <div id="votes" class="accordion-body collapse out">
+    <div class="accordion-inner">
+      {{#each votes}}
+      {{> vote}}
+      {{/each}}
+    </div>
+  </div>
+</div>
+</template>
+
+<template name="vote">
+<div class="vote">
+  {{#if direction}}
+  <span class="badge badge-success">
+    <i class="icon-plus"></i>
+  </span>
+  {{user_netid}} agreed on {{formatDate timestamp}}
+  {{else}}
+  <span class="badge badge-important">
+    <i class="icon-minus"></i>
+  </span>
+  {{user_netid}} disagreed on {{formatDate timestamp}}
+  {{/if}}
+</div>
+</template>
+
+<template name="comment_list">
+<div class="accordion" id="accordion-comments">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-comments" href="#comments">Comments</a>
+    </div>
+  <div id="comments" class="accordion-body collapse out">
+    <div class="accordion-inner">
+      <br>
+      {{#each comments}}
+      {{> comment}}
+      {{/each}}
+      {{> comment_form}}
+    </div>
+  </div>
+</div>
+</template>
+
+<template name="comment">
+<div class="row-fluid">
+  <div class="span1">
+      <div class="btn-group btn-group-vertical">
+        <button class="btn btn-small btn-success action-upvote">
+          <i class="icon-chevron-up"></i>
+        </button>
+        <button class="btn btn-small">{{score}}</button>
+        <button class="btn btn-small btn-danger action-downvote">
+          <i class="icon-chevron-down"></i>
+        </button>
+      </div>
+    </div>
+    <div class="span11">
+      <p>{{text}}</p>
+      <p class="muted">Posted by {{user_netid}} on {{formatDate timestamp}}</p>
+    </div>
+  </div>
+</div>
+<hr>
+</template>
+
+<template name="comment_form">
+<h5>Add a comment</h5>
+<form>
+  <textarea rows="3" id="input-text"></textarea>
+  <br>
+  <a class="btn btn-primary action-submit">Submit</a>
+</form>
 </template>

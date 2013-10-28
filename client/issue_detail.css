@@ -1,0 +1,13 @@
+#accordion-votes, #accordion-comments {
+  background-color: rgb(245,245,245);
+}
+
+.accordion hr {
+  border-bottom: 1px solid rgb(255, 255, 255);
+  height: 3px;
+  background-color: rgb(229, 229, 229);
+}
+
+.accordion textarea {
+  width: 98.5%;
+}
