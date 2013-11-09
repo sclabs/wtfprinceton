@@ -63,5 +63,16 @@ Meteor.methods({
                            comment: comment_id,
                            direction: direction,
                            timestamp: new Date()});
+  },
+
+  editIssue: function(id, title, category, text) {
+    if (!id || !title || !category || !text || !this.userId)
+      return;
+    issueDoc = Issues.findOne(id);
+    if (issueDoc && issueDoc.user_id == this.userId)
+      Issues.update(id, {$set: {title: title,
+                                category: category,
+                                text: text,
+                                last_edited: new Date()}});
   }
 });

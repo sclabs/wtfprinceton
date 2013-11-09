@@ -1,3 +1,12 @@
 .btn-group-vertical > .btn {
   width: 100%;
 }
+
+.btn-group + .btn-group {
+  margin-left: 0px;
+  margin-top: 5px;
+}
+
+.btn-group + .btn {
+  margin-top: 5px;
+}

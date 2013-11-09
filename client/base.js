@@ -26,6 +26,8 @@ Template.category_list.categories = function() {
   return Categories.find({});
 };
 
+// active states
+
 Template.category.active = function() {
   return Session.equals('category', this.name) ? 'active' : '';
 }
@@ -53,6 +55,8 @@ Template.navbar.active_changelog = function() {
 Template.category_sidebar.active_all = function() {
   return Session.equals('category', 'all') ? 'active' : '';
 }
+
+// bootstrap affix the sidebar
 
 Template.category_sidebar.rendered = function() {
   $('#sidebar').affix();

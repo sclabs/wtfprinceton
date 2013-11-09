@@ -11,11 +11,47 @@
           <i class="icon-chevron-down"></i>
         </button>
       </div>
+      {{#if editing}}
+      <div class="btn-group btn-group-vertical">
+        <button class="btn btn-danger action-cancel-edit">
+          <i class="icon-remove"></i>
+        </button>
+        <button class="btn btn-success action-submit-edit">
+          <i class="icon-ok"></i>
+        </button>
+      </div>
+      {{else}}
+      {{#if editable}}
+      <button class="btn action-edit">
+        <i class="icon-pencil"></i>
+      </button>
+      {{/if}}
+      {{/if}}
     </div>
     <div class="span11">
-      <h3><a href="{{pathFor 'issue'}}">{{title}}</a></h3>
-      <p class="muted">Submitted by {{user_netid}} on {{formatDate timestamp}}</p>
+      {{#if editing}}
+      <input type="text" id="edit-title"></input> in 
+      <select id="edit-category">
+        {{#each categories}}
+        {{> category_option}}
+        {{/each}}
+      </select>
+      {{else}}
+      <h3><a href="{{pathFor 'issue'}}">{{title}}</a>
+        <small>in {{category}}</small>
+      </h3>
+      {{/if}}
+      <p class="muted">
+        Submitted by {{user_netid}} on {{formatDate timestamp}}
+        {{#if last_edited}}
+        ; last edited {{formatDate last_edited}}
+        {{/if}}
+      </p>
+      {{#if editing}}
+      <textarea row="3" id="edit-text"></textarea>
+      {{else}}
       <p>{{text}}</p>
+      {{/if}}
     </div>
   </div>
 </div>
