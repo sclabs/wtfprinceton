@@ -24,6 +24,10 @@ Template.comment.score = function() {
   return upvotes - downvotes;
 };
 
+Template.comment.owned = function() {
+  return this.user_id == Meteor.userId();
+};
+
 Template.comment.events({
   "click .action-upvote": function() {
     Meteor.call('commentVote', this._id, true);
@@ -31,6 +35,11 @@ Template.comment.events({
 
   "click .action-downvote": function() {
     Meteor.call('commentVote', this._id, false);
+  },
+
+  "click .action-confirm-comment-delete": function() {
+    $("#modal-delete-comment-" + this._id).modal('hide');
+    Meteor.call('deleteComment', this._id);
   }
 });
 

@@ -85,6 +85,12 @@ Meteor.methods({
       for (var i = 0; i < commentDocs.length; i++)
         deleteComment(commentDocs[i]);
     }
+  },
+
+  deleteComment: function(id) {
+    commentDoc = Comments.findOne(id);
+    if (commentDoc && commentDoc.user_id == this.userId)
+     deleteComment(commentDoc);
   }
 });
 

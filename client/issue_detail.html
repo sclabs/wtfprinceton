@@ -75,12 +75,33 @@
       </div>
     </div>
     <div class="span11">
+      {{#if owned}}
+      <button class="btn btn-small btn-danger" style="float: right;" type="button" data-toggle="modal" data-target="#modal-delete-comment-{{_id}}">
+        <i class="icon-remove"></i>
+      </button>
+      {{/if}}
       <p>{{text}}</p>
       <p class="muted">Posted by {{user_netid}} on {{formatDate timestamp}}</p>
     </div>
   </div>
 </div>
 <hr>
+
+<!-- Modal -->
+<div id="modal-delete-comment-{{_id}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal-label-comment-{{_id}}" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modal-label-comment-{{_id}}">Confirm Delete</h3>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete this comment? Deleted comments cannot be recovered - their votes and text will be lost forever!</p>
+    <p><strong>Comment Text:</strong> {{text}}</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button class="btn btn-danger action-confirm-comment-delete">Confirm Delete</button>
+  </div>
+</div>
 </template>
 
 <template name="comment_form">

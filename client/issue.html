@@ -11,13 +11,13 @@
           <i class="icon-chevron-down"></i>
         </button>
       </div>
+    </div>
+    <div class="span11">
       {{#if owned}}
-      <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-delete-{{_id}}">
+      <button class="btn btn-danger" style="float: right;" type="button" data-toggle="modal" data-target="#modal-delete-{{_id}}">
         <i class="icon-remove"></i>
       </button>
       {{/if}}
-    </div>
-    <div class="span11">
       <h3><a href="{{pathFor 'issue'}}">{{title}}</a></h3>
       <p class="muted">Submitted by {{user_netid}} on {{formatDate timestamp}} in {{category}}</p>
       <p>{{text}}</p>
