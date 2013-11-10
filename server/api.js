@@ -23,7 +23,7 @@ Meteor.methods({
   },
 
   submitComment: function(text, issue_id) {
-    if (!text || !this.userId)
+    if (!text || !this.userId || !issue_id)
       return;
     user_netid = Meteor.user().profile.email.split('@')[0];
     Comments.insert({user_id: this.userId,
@@ -34,7 +34,7 @@ Meteor.methods({
   },
 
   vote: function(issue_id, direction) {
-    if (!_.isBoolean(direction) || !this.userId)
+    if (!_.isBoolean(direction) || !this.userId || !issue_id)
       return;
     voteDoc = Votes.findOne({user_id: this.userId, issue: issue_id});
     if (voteDoc)
@@ -51,7 +51,7 @@ Meteor.methods({
   },
 
   commentVote: function(comment_id, direction) {
-    if (!_.isBoolean(direction) || !this.userId)
+    if (!_.isBoolean(direction) || !this.userId || !comment_id)
       return;
     voteDoc = CommentVotes.findOne({user_id: this.userId,
                                     comment: comment_id});
@@ -65,14 +65,32 @@ Meteor.methods({
                            timestamp: new Date()});
   },
 
-  editIssue: function(id, title, category, text) {
-    if (!id || !title || !category || !text || !this.userId)
-      return;
+  //editIssue: function(id, title, category, text) {
+  //  if (!id || !title || !category || !text || !this.userId)
+  //    return;
+  //  issueDoc = Issues.findOne(id);
+  //  if (issueDoc && issueDoc.user_id == this.userId)
+  //    Issues.update(id, {$set: {title: title,
+  //                              category: category,
+  //                              text: text,
+  //                              last_edited: new Date()}});
+  //}
+
+  deleteIssue: function(id) {
     issueDoc = Issues.findOne(id);
-    if (issueDoc && issueDoc.user_id == this.userId)
-      Issues.update(id, {$set: {title: title,
-                                category: category,
-                                text: text,
-                                last_edited: new Date()}});
+    if (issueDoc && issueDoc.user_id == this.userId) {
+      Issues.remove(id);
+      Votes.remove({issue: id});
+      commentDocs = Comments.find({issue:id}).fetch();
+      for (var i = 0; i < commentDocs.length; i++)
+        deleteComment(commentDocs[i]);
+    }
   }
 });
+
+deleteComment = function(commentDoc) {
+  commentVoteDocs = CommentVotes.find({comment: commentDoc._id}).fetch();
+  for (var i = 0; i < commentVoteDocs.length; i++)
+    CommentVotes.remove(commentVoteDocs[i]._id);
+  Comments.remove(commentDoc._id);
+};

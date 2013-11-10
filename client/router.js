@@ -58,6 +58,8 @@ Router.map(function() {
 
     template: 'issue_detail',
 
+    notFoundTemplate: 'issueNotFound',
+
     action: function() {
       Session.set('state', 'browse');
       Session.set('category', this.getData().category);

@@ -10,9 +10,9 @@ Template.comment_form.events({
   "click .action-submit": function() {
     text = $("#input-text").val();
     if (text) {
-      console.log('calling the function');
       Meteor.call("submitComment", text, this._id);
     }
+    $("#input-text").val('');
   }
 });
 
