@@ -4,7 +4,8 @@
     "basePackages": {
       "router": {},
       "iron-router": {},
-      "moment": {}
+      "moment": {},
+      "lunr": {}
     },
     "packages": {
       "router": {
@@ -21,6 +22,11 @@
         "git": "https://github.com/acreeger/meteor-moment.git",
         "tag": "v2.2.1",
         "commit": "9ee12e714afe56b189f53076447b7b54f3012065"
+      },
+      "lunr": {
+        "git": "https://github.com/electricjesus/meteor-lunr.git",
+        "tag": "v0.4.2.2",
+        "commit": "68bd86d6f5b9f37f13e35bad7e47ad025b54a722"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

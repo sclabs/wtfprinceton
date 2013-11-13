@@ -1,4 +1,5 @@
-Meteor.startup(function () {
+Meteor.startup(function() {
+  // populate categories
   if (Categories.find().count() === 0) {
     var categories = ["Campus Events",
                       "Dining Services",
@@ -14,4 +15,16 @@ Meteor.startup(function () {
     for (var i = 0; i < categories.length; i++)
       Categories.insert({name: categories[i]});
   }
+
+  // define issue index
+  Issues.index = Meteor.lunr(function() {
+    this.field('title', {boost: 10});
+    this.field('text');
+    this.ref('_id');
+  });
+
+  // populate issue index
+  Issues.find({}, {fields: {title: 1, text: 1}}).forEach(function(issue) {
+    Issues.index.add(issue);
+  });
 });

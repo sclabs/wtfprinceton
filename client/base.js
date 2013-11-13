@@ -19,6 +19,23 @@ Template.body.events({
         // login successful!
       }
     });
+  },
+
+  "keypress .search-query": function(e, t) {
+    if (e.which == 13) {
+      e.preventDefault();
+      query = $("#search-input").val();
+      if (query) {
+        Meteor.call('searchIssues', query, function(e, result) {
+          if (typeof e === undefined)
+            Session.set('searchResults', result);
+          else {
+            // TODO: handle the error
+            console.log('an error occured while executing your search query');
+          }
+        });
+      }
+    }
   }
 });
 

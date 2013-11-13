@@ -32,3 +32,8 @@ a:hover {
 #sidebar {
   width: 268px;
 }
+
+#search-input {
+    transition: background-color 1s;
+}
+

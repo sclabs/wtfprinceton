@@ -91,6 +91,11 @@ Meteor.methods({
     commentDoc = Comments.findOne(id);
     if (commentDoc && commentDoc.user_id == this.userId)
      deleteComment(commentDoc);
+  },
+
+  searchIssues: function(query) {
+    //check(query, String);
+    return Issues.index.search(query);
   }
 });
 
