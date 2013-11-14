@@ -94,7 +94,7 @@ Meteor.methods({
   },
 
   searchIssues: function(query) {
-    //check(query, String);
+    check(query, String);
     return Issues.index.search(query);
   }
 });

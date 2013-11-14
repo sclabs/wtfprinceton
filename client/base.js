@@ -27,7 +27,7 @@ Template.body.events({
       query = $("#search-input").val();
       if (query) {
         Meteor.call('searchIssues', query, function(e, result) {
-          if (typeof e === undefined)
+          if (result)
             Session.set('searchResults', result);
           else {
             // TODO: handle the error
