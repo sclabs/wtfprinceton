@@ -2,6 +2,21 @@ Router.configure({
   layoutTemplate: 'body'
 });
 
+getIssues = function() {
+  if (Session.get('category') != 'all' && Session.get('category') != null) {
+    if (Session.get('searchResults'))
+      return Issues.find({_id: {$in : _.map(Session.get('searchResults'), function(e) { return e.ref})}, category: Session.get('category')});
+    else
+      return Issues.find({category: Session.get('category')});
+  }
+  else {
+    if (Session.get('searchResults'))
+      return Issues.find({_id: {$in : _.map(Session.get('searchResults'), function(e) { return e.ref})}});
+    else
+      return Issues.find({});
+  }
+}
+
 Router.map(function() {
   this.route('all', {
     path: '/',
@@ -15,11 +30,7 @@ Router.map(function() {
     },
 
     data: function() {
-      issues = null;
-      if (Session.get('searchResults'))
-        issues = Issues.find({_id: {$in : _.map(Session.get('searchResultsReferences'), function(e) { return e.ref})}});
-      else
-        issues = Issues.find({});
+      issues = getIssues();
       return {
         issues: issues,
         count: issues.count()
@@ -39,7 +50,7 @@ Router.map(function() {
     },
 
     data: function() {
-      issues = Issues.find({category: this.params.name});
+      issues = getIssues();
       return {
         issues: issues,
         count: issues.count()
