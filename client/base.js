@@ -21,21 +21,25 @@ Template.body.events({
     });
   },
 
-  "keypress .search-query": function(e, t) {
-    if (e.which == 13) {
+  "keyup .search-query": function(e, t) {
+    if (e.which == 13)
       e.preventDefault();
-      query = $("#search-input").val();
-      if (query) {
-        Meteor.call('searchIssues', query, function(e, result) {
-          if (result)
-            Session.set('searchResults', result);
-          else {
-            // TODO: handle the error
-            console.log('an error occured while executing your search query');
-          }
-        });
-      }
+    if (Session.get('state') != 'browse') {
+      Router.go('all');
     }
+    query = $("#search-input").val();
+    if (query) {
+      Meteor.call('searchIssues', query, function(e, result) {
+        if (result)
+          Session.set('searchResults', result);
+        else {
+          // TODO: handle the error
+          console.log('an error occured while executing your search query');
+        }
+      });
+    }
+    else
+      Session.set('searchResults', null);
   }
 });
 

@@ -14,12 +14,18 @@ Meteor.methods({
 
     // create the Issue and return its id
     user_netid = Meteor.user().profile.email.split('@')[0];
-    return Issues.insert({title: title,
-                          user_id: this.userId,
-                          user_netid: user_netid,
-                          category: category,
-                          text: text,
-                          timestamp: new Date()});
+    newIssueId = Issues.insert({title: title,
+                                user_id: this.userId,
+                                user_netid: user_netid,
+                                category: category,
+                                text: text,
+                                timestamp: new Date()});
+    
+    // add this issue to the index
+    Issues.index.add(Issues.findOne(newIssueId));
+
+    // return the new issue id
+    return newIssueId;
   },
 
   submitComment: function(text, issue_id) {

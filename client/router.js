@@ -15,7 +15,11 @@ Router.map(function() {
     },
 
     data: function() {
-      issues = Issues.find({});
+      issues = null;
+      if (Session.get('searchResults'))
+        issues = Issues.find({_id: {$in : _.map(Session.get('searchResultsReferences'), function(e) { return e.ref})}});
+      else
+        issues = Issues.find({});
       return {
         issues: issues,
         count: issues.count()
