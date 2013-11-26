@@ -21,6 +21,14 @@ Template.body.events({
     });
   },
 
+  "click .action-sort-hot": function(e, t) {
+    Session.set('sort', {name: 'hot', specifier: {hot: 1}});
+  },
+
+  "click .action-sort-new": function(e, t) {
+    Session.set('sort', {name: 'new', specifier: {new: 1}});
+  },
+
   "keyup .search-query": function(e, t) {
     if (e.which == 13)
       e.preventDefault();
@@ -75,6 +83,27 @@ Template.navbar.active_changelog = function() {
 
 Template.category_sidebar.active_all = function() {
   return Session.equals('category', 'all') ? 'active' : '';
+}
+
+Template.navbar.sort = function() {
+  sort = Session.get('sort');
+  if (sort && sort.name)
+    return sort.name;
+  return ''
+}
+
+Template.navbar.active_hot = function() {
+  sort = Session.get('sort');
+  if (sort && sort.name == 'hot')
+    return 'active'
+  return ''
+}
+
+Template.navbar.active_new = function() {
+  sort = Session.get('sort');
+  if (sort && sort.name == 'new')
+    return 'active'
+  return ''
 }
 
 // bootstrap affix the sidebar
