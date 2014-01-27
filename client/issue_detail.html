@@ -5,10 +5,49 @@
   </div>
   <div class="span9">
     {{> issue}}
+    {{> edit_history}}
     {{> vote_history}}
     {{> comment_list}}
   </div>
 </div>
+</template>
+
+<template name="edit_history">
+<div class="accordion" id="accordion-edits">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-edits" href="#edits">Edit History</a>
+    </div>
+  <div id="edits" class="accordion-body collapse out">
+    <div class="accordion-inner">
+      {{#each edits}}
+      {{> edit}}
+      {{/each}}
+      <div class="edit row-fluid">
+        <div class="span1">
+          <button class="btn btn-small disabled">{{latest_score}}</button>
+        </div>
+        <div class="span11">
+          <p class="muted">{{formatDate timestamp}}</p>
+          <p>{{text}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
+<template name="edit">
+<div class="edit row-fluid">
+  <div class="span1">
+    <button class="btn btn-small disabled">{{score}}</button>
+  </div>
+  <div class="span11">
+    <p class="muted">{{formatDate timestamp}}</p>
+    <p>{{text}}</p>
+  </div>
+</div>
+<hr>
 </template>
 
 <template name="vote_history">

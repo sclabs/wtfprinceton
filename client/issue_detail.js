@@ -1,3 +1,29 @@
+Template.edit_history.edits = function() {
+  edits = this.edits;
+  // augment the edits object with some additional useful data
+  if (edits) {
+    next_timestamp = this.timestamp;
+    for (i = edits.length - 1; i >= 0; i--) {
+      edits[i].next_timestamp = next_timestamp;
+      next_timestamp = edits[i].timestamp;
+      edits[i].issue_id = this._id;
+    }
+  }
+  return edits;
+}
+
+Template.edit_history.latest_score = function() {
+  upvotes = Votes.find({issue: this._id, direction: true, timestamp: {$gte: this.timestamp}}).count();
+  downvotes = Votes.find({issue: this._id, direction: false, timestamp: {$gte: this.timestamp}}).count();
+  return upvotes - downvotes;
+}
+
+Template.edit.score = function() {
+  upvotes = Votes.find({issue: this.issue_id, direction: true, timestamp: {$gte: this.timestamp, $lt: this.next_timestamp}}).count();
+  downvotes = Votes.find({issue: this.issue_id, direction: false, timestamp: {$gte: this.timestamp, $lt: this.next_timestamp}}).count();
+  return upvotes - downvotes;
+}
+
 Template.vote_history.votes = function() {
   return Votes.find({issue: this._id});
 }
