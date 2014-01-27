@@ -47,9 +47,10 @@
       </h3>
       {{/if}}
       <p class="muted">
-        Submitted by {{user_netid}} on {{formatDate timestamp}}
-        {{#if last_edited}}
-        ; last edited {{formatDate last_edited}}
+       	{{#if edited}}
+        Submitted by {{user_netid}} on {{formatDate submitted}}; last edited {{formatDate timestamp}}
+        {{else}}
+        Submitted by {{used_netid}} on {{formatDate timestamp}}
         {{/if}}
       </p>
       {{#if editing}}

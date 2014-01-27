@@ -19,6 +19,17 @@ Template.issue.categories = function() {
   return Categories.find({});
 }
 
+Template.issue.edited = function() {
+  return this.edits;
+}
+
+Template.issue.submitted = function() {
+  if (this.edits) {
+    return this.edits[0].timestamp;
+  }
+  return null;
+}
+
 Template.issue.events({
   "click .action-upvote": function() {
     Meteor.call('vote', this._id, true);

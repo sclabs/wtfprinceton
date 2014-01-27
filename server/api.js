@@ -71,16 +71,21 @@ Meteor.methods({
                            timestamp: new Date()});
   },
 
-  //editIssue: function(id, title, category, text) {
-  //  if (!id || !title || !category || !text || !this.userId)
-  //    return;
-  //  issueDoc = Issues.findOne(id);
-  //  if (issueDoc && issueDoc.user_id == this.userId)
-  //    Issues.update(id, {$set: {title: title,
-  //                              category: category,
-  //                              text: text,
-  //                              last_edited: new Date()}});
-  //}
+  editIssue: function(id, title, category, text) {
+    if (!id || !title || !category || !text || !this.userId)
+      return;
+    issueDoc = Issues.findOne(id);
+    if (issueDoc && issueDoc.user_id == this.userId) {
+      Issues.update(id, {$push: {edits: {title: issueDoc.title,
+                                         category: issueDoc.category,
+                                         text: issueDoc.text,
+                                         timestamp: issueDoc.timestamp}}});
+      Issues.update(id, {$set: {title: title,
+                                category: category,
+                                text: text,
+                                timestamp: new Date()}});
+    }
+  },
 
   deleteIssue: function(id) {
     issueDoc = Issues.findOne(id);
