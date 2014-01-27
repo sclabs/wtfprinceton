@@ -22,11 +22,11 @@ Template.body.events({
   },
 
   "click .action-sort-hot": function(e, t) {
-    Session.set('sort', {name: 'hot', specifier: {hot: 1}});
+    Session.set('sort', {name: 'Hot', specifier: {hot: -1}});
   },
 
   "click .action-sort-new": function(e, t) {
-    Session.set('sort', {name: 'new', specifier: {new: 1}});
+    Session.set('sort', {name: 'New', specifier: {timestamp: -1}});
   },
 
   "keyup .search-query": function(e, t) {
@@ -89,20 +89,20 @@ Template.navbar.sort = function() {
   sort = Session.get('sort');
   if (sort && sort.name)
     return sort.name;
-  Session.set('sort', {name: 'hot', specifier: {hot: 1}});
-  return 'hot'
+  Session.set('sort', {name: 'Hot', specifier: {hot: -1}});
+  return 'Hot'
 }
 
 Template.navbar.active_hot = function() {
   sort = Session.get('sort');
-  if (sort && sort.name == 'hot')
+  if (sort && sort.name == 'Hot')
     return 'active'
   return ''
 }
 
 Template.navbar.active_new = function() {
   sort = Session.get('sort');
-  if (sort && sort.name == 'new')
+  if (sort && sort.name == 'New')
     return 'active'
   return ''
 }

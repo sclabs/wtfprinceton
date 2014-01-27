@@ -3,17 +3,20 @@ Router.configure({
 });
 
 getIssues = function() {
+  sort_specifier = {hot: -1};
+  if (Session.get('sort'))
+    sort_specifier = Session.get('sort').specifier;
   if (Session.get('category') != 'all' && Session.get('category') != null) {
     if (Session.get('searchResults'))
-      return Issues.find({_id: {$in : _.map(Session.get('searchResults'), function(e) { return e.ref})}, category: Session.get('category')});
+      return Issues.find({_id: {$in : _.map(Session.get('searchResults'), function(e) { return e.ref})}, category: Session.get('category')}, {sort: sort_specifier});
     else
-      return Issues.find({category: Session.get('category')});
+      return Issues.find({category: Session.get('category')}, {sort: sort_specifier});
   }
   else {
     if (Session.get('searchResults'))
-      return Issues.find({_id: {$in : _.map(Session.get('searchResults'), function(e) { return e.ref})}});
+      return Issues.find({_id: {$in : _.map(Session.get('searchResults'), function(e) { return e.ref})}}, {sort: sort_specifier});
     else
-      return Issues.find({});
+      return Issues.find({}, {sort: sort_specifier});
   }
 }
 
