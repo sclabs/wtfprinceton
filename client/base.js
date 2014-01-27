@@ -89,7 +89,8 @@ Template.navbar.sort = function() {
   sort = Session.get('sort');
   if (sort && sort.name)
     return sort.name;
-  return ''
+  Session.set('sort', {name: 'hot', specifier: {hot: 1}});
+  return 'hot'
 }
 
 Template.navbar.active_hot = function() {
