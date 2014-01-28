@@ -29,6 +29,14 @@ Template.body.events({
     Session.set('sort', {name: 'New', specifier: {timestamp: -1}});
   },
 
+  "click .action-theme-princeton": function(e, t) {
+    Session.set('theme', 'princeton');
+  },
+
+  "click .action-theme-bootstrap": function(e, t) {
+    Session.set('theme', 'bootstrap');
+  },
+
   "keyup .search-query": function(e, t) {
     if (e.which == 13)
       e.preventDefault();
@@ -85,6 +93,14 @@ Template.category_sidebar.active_all = function() {
   return Session.equals('category', 'all') ? 'active' : '';
 }
 
+Template.user_loggedin.active_theme_princeton = function() {
+  return Session.equals('theme', 'princeton') ? 'active' : '';
+}
+
+Template.user_loggedin.active_theme_bootstrap = function() {
+  return Session.equals('theme', 'bootstrap') ? 'active' : '';
+}
+
 Template.navbar.sort = function() {
   sort = Session.get('sort');
   if (sort && sort.name)
@@ -106,6 +122,29 @@ Template.navbar.active_new = function() {
     return 'active'
   return ''
 }
+
+// apply theme as necessary
+Deps.autorun(function() {
+  if (Session.equals('theme', 'princeton')) {
+    document.styleSheets[document.styleSheets.length - 1].disabled = false;
+    Meteor.users.update(Meteor.userId(), {$set: {'profile.theme': 'princeton'}});
+  }
+  else if (Session.equals('theme', 'bootstrap')) {
+    document.styleSheets[document.styleSheets.length - 1].disabled = true;
+    Meteor.users.update(Meteor.userId(), {$set: {'profile.theme': 'bootstrap'}});
+  }
+  else {
+    if (Meteor.user()) {
+      if (Meteor.user().profile.theme)
+        Session.set('theme', Meteor.user().profile.theme);
+      else {
+        document.styleSheets[document.styleSheets.length - 1].disabled = false;
+        Session.set('theme', 'princeton');
+        Meteor.users.update(Meteor.userId(), {$set: {'profile.theme': 'princeton'}});
+      }
+    }
+  } 
+});
 
 // bootstrap affix the sidebar
 
