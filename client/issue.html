@@ -1,8 +1,46 @@
 <template name="issue">
-<div class="well">
+<div class="well issue">
   <div class="row-fluid">
     <div class="span1">
-      <div class="btn-group btn-group-vertical">
+      <div class="btn-toolbar mobile">
+        <div class="btn-group">
+          <button class="btn btn-success action-upvote">
+            <i class="icon-chevron-up"></i>
+          </button>
+          <button class="btn">{{score}}</button>
+          <button class="btn btn-danger action-downvote">
+            <i class="icon-chevron-down"></i>
+          </button>
+        </div>
+        {{#if editing}}
+        <div class="btn-group">
+          <button class="btn btn-danger action-cancel-edit">
+            <i class="icon-remove"></i>
+          </button>
+          <button class="btn btn-success action-submit-edit">
+            <i class="icon-ok"></i>
+          </button>
+        </div>
+        {{else}}
+        {{#if owned}}
+        <div class="btn-group">
+          <button class="btn action-edit">
+            <i class="icon-pencil"></i>
+          </button>
+        </div>
+        {{/if}}
+        {{/if}}
+        {{#if owned}}
+        {{#unless editing}}
+        <div class="btn-group">
+          <button class="btn btn-danger" style="float: right;" type="button" data-toggle="modal" data-target="#modal-delete-{{_id}}">
+            <i class="icon-remove"></i>
+          </button>
+        </div>
+        {{/unless}}
+        {{/if}}
+      </div>
+      <div class="btn-group btn-group-vertical desktop">
         <button class="btn btn-success action-upvote">
           <i class="icon-chevron-up"></i>
         </button>
@@ -12,7 +50,7 @@
         </button>
       </div>
       {{#if editing}}
-      <div class="btn-group btn-group-vertical">
+      <div class="btn-group btn-group-vertical desktop">
         <button class="btn btn-danger action-cancel-edit">
           <i class="icon-remove"></i>
         </button>
@@ -22,7 +60,7 @@
       </div>
       {{else}}
       {{#if owned}}
-      <button class="btn action-edit">
+      <button class="btn action-edit desktop">
         <i class="icon-pencil"></i>
       </button>
       {{/if}}
@@ -30,7 +68,7 @@
     </div>
     <div class="span11">
       {{#if owned}}
-      <button class="btn btn-danger" style="float: right;" type="button" data-toggle="modal" data-target="#modal-delete-{{_id}}">
+      <button class="btn btn-danger desktop" style="float: right;" type="button" data-toggle="modal" data-target="#modal-delete-{{_id}}">
         <i class="icon-remove"></i>
       </button>
       {{/if}}

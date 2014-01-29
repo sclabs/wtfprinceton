@@ -10,3 +10,7 @@
 .btn-group + .btn {
   margin-top: 5px;
 }
+
+.issue {
+  padding: 19px;
+}

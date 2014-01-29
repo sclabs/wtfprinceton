@@ -63,6 +63,10 @@ Template.category_list.categories = function() {
   return Categories.find({});
 };
 
+Template.user_loggedin.netid = function() {
+  return Meteor.user().profile.email.split('@')[0];
+}
+
 // active states
 
 Template.category.active = function() {

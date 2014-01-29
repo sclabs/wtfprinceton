@@ -1,0 +1,44 @@
+@media (max-width: 767px) {
+  .desktop {
+    display: none;
+  }
+
+  #wrap > .container {
+    padding-top: 0px;
+  }
+
+  .btn-group + .btn-group {
+    margin-left: 5px;
+    margin-top: 0px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  #wrap > .container {
+    padding-top: 0px;
+  }
+
+  .btn.action-edit {
+    width: 29px;
+  }
+
+  #sidebar {
+    width: 166px;
+  }
+}
+
+@media (min-width: 980px) and (max-width: 1199px) {
+  #sidebar {
+    width: 220px;
+  }
+
+  .hawkward {
+    display: none;
+  }
+}

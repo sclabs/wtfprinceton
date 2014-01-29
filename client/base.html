@@ -6,6 +6,7 @@
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
   </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <link rel="stylesheet" type="text/css" href="theme_princeton.css" />
 </head>
 
@@ -32,7 +33,7 @@
       <div class="nav-collapse">
         <ul class="nav">
           <li class="{{active_submit}}"><a href="{{pathFor 'submit'}}">Submit Issue</a></li>
-          <li class="dropdown {{active_browse}}"><a class="dropdown-toggle" data-toggle="dropdown">Browse Issues <b class="caret"></b></a>
+          <li class="dropdown {{active_browse}} hawkward"><a class="dropdown-toggle" data-toggle="dropdown">Browse Issues <b class="caret"></b></a>
             <ul class="dropdown-menu">
               {{> category_list}}
               <li class="divider"></li>
@@ -74,7 +75,7 @@
 {{else}}
 <li class="dropdown pull-right">
   <a class="dropdown-toggle" data-toggle="dropdown">
-    {{currentUser.profile.name}} <b class="caret"></b>
+    {{netid}} <b class="caret"></b>
   </a>
   <ul class="dropdown-menu">
     <li class="{{active_theme_princeton}}"><a class="action-theme-princeton">Princeton Theme</a></li>
@@ -91,7 +92,7 @@
 </template>
 
 <template name="category_sidebar">
-<div class="well nav-well" id="sidebar">
+<div class="well nav-well desktop" id="sidebar">
   <ul class="nav nav-list">
     <li class="nav-header">Categories</li>
     {{> category_list}}
