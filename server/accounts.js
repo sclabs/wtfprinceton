@@ -1,6 +1,6 @@
 // restrict user creation to princeton.edu domain
 Accounts.validateNewUser(function (user) {
-    if(user.services.google.email.match(/princeton\.edu$/)) {
+    if(user.services.google.email.match(/princeton\.edu$/) || user.services.google.email.match(/unomaha\.edu$/)) {
         return true;
     }
     throw new Meteor.Error(403, "You must sign in using a princeton.edu account");
