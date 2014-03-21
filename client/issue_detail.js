@@ -34,8 +34,16 @@ Template.vote_history.votes = function() {
   return Votes.find({issue: this._id});
 }
 
+Template.vote_history.vote_count = function() {
+  return Votes.find({issue: this._id}).count();
+}
+
 Template.comment_list.comments = function() {
   return Comments.find({issue: this._id});
+}
+
+Template.comment_list.comment_count = function() {
+  return Comments.find({issue: this._id}).count();
 }
 
 Template.comment_form.events({
