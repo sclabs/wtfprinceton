@@ -18,6 +18,12 @@ Template.edit_history.latest_score = function() {
   return upvotes - downvotes;
 }
 
+Template.edit_history.edit_count = function() {
+  edits = this.edits;
+  if (edits) return edits.length;
+  else return 0;
+}
+
 Template.edit.score = function() {
   upvotes = Votes.find({issue: this.issue_id, direction: true, timestamp: {$gte: this.timestamp, $lt: this.next_timestamp}}).count();
   downvotes = Votes.find({issue: this.issue_id, direction: false, timestamp: {$gte: this.timestamp, $lt: this.next_timestamp}}).count();
