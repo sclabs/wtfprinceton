@@ -37,11 +37,13 @@ Template.body.events({
     Session.set('theme', 'bootstrap');
   },
 
-  "keyup .search-query": function(e, t) {
+  "keydown .search-query": function(e, t) {
     if (e.which == 13)
       e.preventDefault();
     if (Session.get('state') != 'browse') {
+      query = $("search-input").val(); 
       Router.go('all');
+      $("#search-input").val(query);
     }
     query = $("#search-input").val();
     if (query) {
